@@ -1,0 +1,332 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Session 3 · Everyday Objects</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Patrick+Hand&display=swap');
+:root{--navy:#123d66;--navy2:#0d2f52;--blue:#1697df;--sky:#eaf6fd;--mint:#e9f7ef;--yellow:#ffd34e;--white:#fff;--line:#d7e3eb;--muted:#667d90;--shadow:0 12px 28px rgba(18,61,102,.10);--pink:#fff1f4}
+*{box-sizing:border-box}html,body{margin:0;height:100%;font-family:'Nunito',Arial,sans-serif;background:#eef3f6;color:var(--navy)}body{overflow:hidden}button{font:inherit}
+.app{height:100vh;display:grid;grid-template-columns:240px 1fr;grid-template-rows:62px 1fr}
+.topbar{grid-column:1/3;background:linear-gradient(90deg,var(--navy2),#1b5d8c);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 14px 0 16px;box-shadow:0 3px 10px rgba(0,0,0,.12);z-index:20}
+.brand-wrap{display:flex;align-items:center;gap:12px}.brand-icon{width:38px;height:38px;border-radius:10px;background:#148fda;display:grid;place-items:center;font-size:22px}.brand-title{font-size:17px;font-weight:900;line-height:1}.brand-sub{font-size:12px;color:#d6e8f4;margin-top:4px}
+.top-actions{display:flex;align-items:center;gap:10px}.top-count{font-weight:800;font-size:15px;margin-right:4px}.top-btn{width:48px;height:42px;border:0;border-radius:10px;background:rgba(255,255,255,.12);color:#fff;font-size:23px;font-weight:900;cursor:pointer}.top-btn.next{background:#1198e5}
+.sidebar{grid-row:2;background:#fff;border-right:1px solid #d8e3ea;overflow:auto;padding:8px 7px 14px}.side-item{width:100%;border:0;background:transparent;border-radius:9px;padding:6px 7px;display:grid;grid-template-columns:22px 52px 1fr;gap:7px;align-items:center;text-align:left;color:var(--navy);font-size:12px;cursor:pointer}.side-item:hover{background:#edf7fd}.side-item.active{background:linear-gradient(90deg,#2b8dd0,#3d9cdf);color:#fff}.side-num{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#edf2f6;font-size:11px;font-weight:900;color:var(--navy)}.side-item.active .side-num{background:#fff;color:#2789ca}.thumb{height:34px;width:52px;object-fit:cover;border-radius:7px;border:1px solid rgba(0,0,0,.08)}.side-foot{margin:12px 8px 0;padding-top:11px;border-top:1px solid #dbe4ea;font-size:10px;color:var(--muted);line-height:1.5}
+.main{grid-column:2;grid-row:2;overflow:hidden;position:relative}.deck{position:relative;width:100%;height:100%}.slide{position:absolute;inset:0;padding:0 14px 14px;overflow:auto;opacity:0;pointer-events:none;transform:translateX(18px);transition:.22s ease}.slide.active{opacity:1;pointer-events:auto;transform:none}.slide-inner{max-width:1320px;margin:0 auto}
+.hero{height:290px;margin:0 -14px;position:relative;overflow:hidden;background-size:cover;background-position:center}.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,253,248,.95) 0%,rgba(255,253,248,.88) 35%,rgba(255,253,248,.35) 58%,rgba(20,45,70,.08) 100%)}.hero-content{position:absolute;left:36px;top:24px;z-index:2;max-width:560px}.session-pill{display:inline-block;background:var(--yellow);padding:8px 18px;border-radius:999px;font-size:13px;font-weight:900;letter-spacing:.08em}.hero h1{font-size:62px;line-height:.88;margin:12px 0 8px;color:#082f59;font-weight:900;letter-spacing:-2px}.hero p{font-size:18px;font-weight:800;margin:0}.hero-line{width:125px;height:6px;border-radius:99px;background:var(--yellow);margin-top:12px}
+.section-box{margin-top:12px;border:1px solid var(--line);border-radius:16px;background:#fff;overflow:hidden;box-shadow:var(--shadow)}.top-space{margin-top:18px}.section-title{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg,var(--navy),#0f6bb0);color:#fff;padding:10px 14px}.section-title small{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#d8edf8;font-weight:900}.section-title h2{margin:2px 0 0;font-size:24px}.circle-no{width:34px;height:34px;border-radius:50%;background:#fff;color:var(--navy);display:grid;place-items:center;font-weight:900}
+.section-split{display:grid;grid-template-columns:1fr;gap:14px;padding:16px;background:#fff}.section-image-pane{width:100%;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:transparent}.section-visual-image{display:block;width:100%;height:auto;object-fit:contain}.section-content-pane{width:100%}.section-body{padding:13px}.section-content-pane>.section-body{padding:0}
+.leadline{font-size:14px;font-weight:700;color:var(--muted);margin:0 0 12px}.cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 14px;box-shadow:0 5px 14px rgba(18,61,102,.05)}.card.sky{background:#eef8fd}.card.mint{background:#eef9f3}.card.yellow{background:#fff7d7}.card.pink{background:#fff1f4}.card h3{margin:0 0 6px;font-size:16px}.card p{margin:0;font-size:12.5px;line-height:1.45}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.check{padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:12px;font-weight:700}.check::before{content:'✓';display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#46a640;color:#fff;margin-right:6px;font-size:10px;font-weight:900}
+.example{background:#fff;border-left:5px solid var(--yellow);padding:9px 11px;border-radius:9px;margin:7px 0;font-size:14px;font-weight:800;line-height:1.3}.bookref{display:flex;gap:8px;align-items:flex-start;background:#fff;border:2px dashed #bcddea;border-radius:11px;padding:9px 10px;font-size:12px;font-weight:800;margin-top:10px}.page{background:#9459c9;color:#fff;border-radius:8px;padding:4px 7px;font-size:10px;white-space:nowrap}
+.pills{display:flex;flex-wrap:wrap;gap:6px}.pill{padding:7px 9px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:12px;font-weight:800}.table{width:100%;border-collapse:collapse;font-size:12px;background:#fff;border-radius:12px;overflow:hidden}.table th,.table td{border:1px solid var(--line);padding:8px 9px;text-align:left}.table th{background:#eaf6fd;font-weight:900}
+.quizrow{background:#fff;border:1px solid var(--line);border-radius:11px;padding:10px;display:grid;grid-template-columns:1fr auto;gap:9px;align-items:center;font-size:12px;margin-bottom:8px}.reveal{border:0;border-radius:8px;background:#e8f5fd;color:var(--navy);padding:7px 10px;font-weight:900;cursor:pointer}.answer{display:none;color:#299667;font-weight:900;grid-column:1/3}.answer.show{display:block}
+.strip-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:10px;margin-top:12px}.strip{border-radius:12px;padding:12px 13px;border:1px solid var(--line)}.strip h4{margin:0 0 6px}.strip.green{background:#eef9ef}.strip.yellow{background:#fff5d6}.strip.dark{background:linear-gradient(135deg,#e6c487,#9c6a41);color:#fff}.hand-note{font-family:'Patrick Hand',cursive;font-size:26px;line-height:1.05;margin:0}ul{padding-left:18px}li{margin:5px 0;font-size:12.5px}p{line-height:1.45}
+@media(max-width:1100px){.app{grid-template-columns:0 1fr}.sidebar{display:none}.topbar{grid-column:1/3}.main{grid-column:1/3}.cards4,.grid2,.grid3,.strip-grid,.checks{grid-template-columns:1fr}.hero{height:240px}.hero h1{font-size:46px}.hero-content{left:20px;top:18px;max-width:420px}.section-split{padding:10px}}
+</style></head><body>
+<div class="app">
+<header class="topbar"><div class="brand-wrap"><div class="brand-icon">📘</div><div><div class="brand-title">English for Your Work and Everyday Life</div><div class="brand-sub">American English File Starter · Session 3</div></div></div>
+<div class="top-actions"><span class="top-count" id="counter">1 / 21</span><button class="top-btn" id="prevBtn" aria-label="Previous">‹</button><button class="top-btn next" id="nextBtn" aria-label="Next">›</button><button class="top-btn" id="fullBtn" aria-label="Fullscreen">⛶</button></div></header>
+<aside class="sidebar"><button class="side-item active" data-i="0"><span class="side-num">1</span><img class="thumb" alt="" src="assets/01_everyday_objects.jpg"><span>Everyday Objects</span></button><button class="side-item " data-i="1"><span class="side-num">2</span><img class="thumb" alt="" src="assets/02_goal.jpg"><span>Your goal today</span></button><button class="side-item " data-i="2"><span class="side-num">3</span><img class="thumb" alt="" src="assets/03_warmup.jpg"><span>Start with what you know</span></button><button class="side-item " data-i="3"><span class="side-num">4</span><img class="thumb" alt="" src="assets/04_articles.jpg"><span>A or an?</span></button><button class="side-item " data-i="4"><span class="side-num">5</span><img class="thumb" alt="" src="assets/04_articles.jpg"><span>Listen to the sound</span></button><button class="side-item " data-i="5"><span class="side-num">6</span><img class="thumb" alt="" src="assets/05_plural.jpg"><span>One object, two objects</span></button><button class="side-item " data-i="6"><span class="side-num">7</span><img class="thumb" alt="" src="assets/05_plural.jpg"><span>Plural endings</span></button><button class="side-item " data-i="7"><span class="side-num">8</span><img class="thumb" alt="" src="assets/06_small_things.jpg"><span>Small things</span></button><button class="side-item " data-i="8"><span class="side-num">9</span><img class="thumb" alt="" src="assets/10_mining_english.jpg"><span>Objects at work</span></button><button class="side-item " data-i="9"><span class="side-num">10</span><img class="thumb" alt="" src="assets/10_mining_english.jpg"><span>Equipment is different</span></button><button class="side-item " data-i="10"><span class="side-num">11</span><img class="thumb" alt="" src="assets/07_demonstratives.jpg"><span>This or that?</span></button><button class="side-item " data-i="11"><span class="side-num">12</span><img class="thumb" alt="" src="assets/08_demonstratives_plural.jpg"><span>These or those?</span></button><button class="side-item " data-i="12"><span class="side-num">13</span><img class="thumb" alt="" src="assets/07_demonstratives.jpg"><span>Ask about objects</span></button><button class="side-item " data-i="13"><span class="side-num">14</span><img class="thumb" alt="" src="assets/09_prepositions.jpg"><span>Where is it?</span></button><button class="side-item " data-i="14"><span class="side-num">15</span><img class="thumb" alt="" src="assets/09_prepositions.jpg"><span>Locate equipment at work</span></button><button class="side-item " data-i="15"><span class="side-num">16</span><img class="thumb" alt="" src="assets/05_plural.jpg"><span>Plural pronunciation</span></button><button class="side-item " data-i="16"><span class="side-num">17</span><img class="thumb" alt="" src="assets/10_mining_english.jpg"><span>Mining English</span></button><button class="side-item " data-i="17"><span class="side-num">18</span><img class="thumb" alt="" src="assets/02_goal.jpg"><span>Build the sentence</span></button><button class="side-item " data-i="18"><span class="side-num">19</span><img class="thumb" alt="" src="assets/11_speaking.jpg"><span>Find the equipment</span></button><button class="side-item " data-i="19"><span class="side-num">20</span><img class="thumb" alt="" src="assets/11_speaking.jpg"><span>Check what you can do</span></button><button class="side-item " data-i="20"><span class="side-num">21</span><img class="thumb" alt="" src="assets/12_homework.jpg"><span>Keep practicing</span></button><div class="side-foot"><b>English with Mr. Rengifo</b><br>Session 3 · 90 minutes<br>3A–3B · pp. 16–19</div></aside>
+<main class="main"><div class="deck"><section class="slide active"><div class="slide-inner">
+<div class="hero" style="background-image:url('assets/01_everyday_objects.jpg')"><div class="hero-overlay"></div><div class="hero-content"><span class="session-pill">SESSION 3</span><h1>Everyday<br/>Objects</h1><p>See it. Name it. Locate it.</p><div class="hero-line"></div></div></div>
+<div class="section-box"><div class="section-body">
+<div class="cards4">
+  <div class="card sky"><h3>🎯 Your goal</h3><p>Identify everyday and work objects, use singular/plural forms, and say where objects are.</p></div>
+  <div class="card mint"><h3>📘 Coursebook</h3><p>American English File Starter · Unit 3A–3B · pp. 16–19.</p></div>
+  <div class="card yellow"><h3>⛏️ Your context</h3><p>Everyday objects + PPE, tools and equipment used at work.</p></div>
+  <div class="card pink"><h3>💬 Main outcome</h3><p>Ask what an object is and describe its location with less support.</p></div>
+</div>
+<div class="strip-grid">
+  <div class="strip green"><h4>Today we build on Sessions 1–2</h4><p>You already talk about people. Now you add <b>things</b>.</p></div>
+  <div class="strip yellow"><h4>Core language</h4><p>a / an · singular/plural · this/that/these/those · in/on/under</p></div>
+  <div class="strip dark"><p class="hand-note">See it.<br/>Name it.<br/>Locate it.</p></div>
+</div>
+</div></div>
+</div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Today’s Goal</small><h2>Your goal today</h2></div><div class="circle-no">2</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="Your goal today" src="assets/02_goal.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">By the end of the session, you can identify common objects, choose a/an, form basic plurals, use this/that/these/those, and locate objects with in/on/under.</p>
+<div class="grid2">
+  <div class="card mint"><h3>By the end, you can…</h3>
+    <div class="checks"><div class="check">Use a / an</div><div class="check">Form basic plurals</div><div class="check">Use this / that</div><div class="check">Use these / those</div><div class="check">Ask about objects</div><div class="check">Use in / on / under</div></div>
+  </div>
+  <div class="card yellow"><h3>Communication goal</h3><p>Identify and locate everyday objects and basic work equipment.</p>
+    <div class="example">What is this? → It’s a radio.</div>
+    <div class="example">Where are the gloves? → They’re in the locker.</div>
+  </div>
+</div>
+<div class="bookref"><span class="page">BOOK</span><span>SB 3A–3B · pp. 16–19</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Quick Review</small><h2>Start with what you know</h2></div><div class="circle-no">3</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="Start with what you know" src="assets/03_warmup.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Warm up with real objects around you and recycle question forms from the first two sessions.</p>
+<div class="grid3">
+  <div class="card"><h3>1. Look around</h3><p>Name three objects you can see.</p></div>
+  <div class="card sky"><h3>2. Singular or plural?</h3><p>One phone. Two phones. One key. Two keys.</p></div>
+  <div class="card mint"><h3>3. Ask</h3><p>What is it? What are they?</p></div>
+</div>
+<div class="example">Challenge: Name one object from home and one object from your workplace.</div>
+<div class="bookref"><span class="page">LEAD-IN</span><span>Teacher-designed review before Unit 3A.</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Articles</small><h2>A or an?</h2></div><div class="circle-no">4</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="A or an?" src="assets/04_articles.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Use <b>a</b> or <b>an</b> before one countable object.</p>
+<div class="grid2">
+  <div class="card sky"><h3>Use a</h3><div class="example">a phone</div><div class="example">a wallet</div><div class="example">a helmet</div><p>Use <b>a</b> before a consonant sound.</p></div>
+  <div class="card mint"><h3>Use an</h3><div class="example">an umbrella</div><div class="example">an ID card</div><p>Use <b>an</b> before a vowel sound.</p></div>
+</div>
+<div class="bookref"><span class="page">BOOK</span><span>Grammar Bank 3A · p. 96</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>A / An Practice</small><h2>Listen to the sound</h2></div><div class="circle-no">5</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="Listen to the sound" src="assets/04_articles.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Choose the article by the <b>sound</b>, not only by the written letter.</p>
+<div class="grid3">
+  <div class="card"><h3>a</h3><p>a radio<br/>a bag<br/>a key</p></div>
+  <div class="card mint"><h3>an</h3><p>an umbrella<br/>an ID card</p></div>
+  <div class="card yellow"><h3>No article</h3><p><b>equipment</b> is usually uncountable in general use.</p></div>
+</div>
+<div class="example">Quick check: ___ helmet · ___ umbrella · ___ radio · ___ ID card</div>
+<div class="bookref"><span class="page">3A</span><span>Article practice linked to pp. 16–17.</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Singular & Plural</small><h2>One object, two objects</h2></div><div class="circle-no">6</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="One object, two objects" src="assets/05_plural.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Change a singular noun to a plural noun when there is more than one.</p>
+<table class="table">
+  <tr><th>Singular</th><th>Plural</th><th>Example</th></tr>
+  <tr><td>a key</td><td>keys</td><td>two keys</td></tr>
+  <tr><td>a phone</td><td>phones</td><td>three phones</td></tr>
+  <tr><td>a radio</td><td>radios</td><td>two radios</td></tr>
+  <tr><td>a glove</td><td>gloves</td><td>two gloves</td></tr>
+</table>
+<div class="example">Most basic plurals add <b>-s</b>.</div>
+<div class="bookref"><span class="page">BOOK</span><span>Grammar Bank 3A · p. 96</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Grammar Focus</small><h2>Plural endings</h2></div><div class="circle-no">7</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="Plural endings" src="assets/05_plural.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Some nouns need <b>-es</b>. Focus on recognizing the pattern.</p>
+<div class="grid2">
+  <div class="card sky"><h3>Add -s</h3><p>key → keys<br/>phone → phones<br/>helmet → helmets</p></div>
+  <div class="card mint"><h3>Add -es</h3><p>watch → watches<br/>box → boxes</p></div>
+</div>
+<div class="example">Say it aloud: one watch → two watches · one box → two boxes.</div>
+<div class="bookref"><span class="page">BOOK</span><span>3A singular/plural practice · pp. 16–17</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Vocabulary</small><h2>Small things</h2></div><div class="circle-no">8</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="Small things" src="assets/06_small_things.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Build a useful bank of everyday objects you can identify in real life.</p>
+<div class="pills">
+  <span class="pill">phone</span><span class="pill">keys</span><span class="pill">wallet</span><span class="pill">bag</span><span class="pill">umbrella</span><span class="pill">watch</span><span class="pill">ID card</span><span class="pill">box</span>
+</div>
+<div class="grid2" style="margin-top:12px">
+  <div class="card yellow"><h3>Ask</h3><div class="example">What is it?</div><div class="example">What are they?</div></div>
+  <div class="card mint"><h3>Answer</h3><div class="example">It’s a wallet.</div><div class="example">They’re keys.</div></div>
+</div>
+<div class="bookref"><span class="page">BOOK</span><span>Vocabulary Bank · Small things · p. 119</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Work Vocabulary</small><h2>Objects at work</h2></div><div class="circle-no">9</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="Objects at work" src="assets/10_mining_english.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Connect the new grammar to objects Jimmy may see at a mining site.</p>
+<div class="pills">
+  <span class="pill">helmet</span><span class="pill">gloves</span><span class="pill">boots</span><span class="pill">vest</span><span class="pill">radio</span><span class="pill">tools</span><span class="pill">equipment</span>
+</div>
+<div class="grid3" style="margin-top:12px">
+  <div class="card"><h3>Singular</h3><p>a helmet<br/>a vest<br/>a radio</p></div>
+  <div class="card mint"><h3>Plural</h3><p>gloves<br/>boots<br/>tools</p></div>
+  <div class="card yellow"><h3>Special note</h3><p><b>equipment</b> is normally uncountable. Say “equipment” or “a piece of equipment.”</p></div>
+</div>
+<div class="bookref"><span class="page">EXTENSION</span><span>Mining English Bank</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Vocabulary Note</small><h2>Equipment is different</h2></div><div class="circle-no">10</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="Equipment is different" src="assets/10_mining_english.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Avoid a very common error with the word <b>equipment</b>.</p>
+<div class="grid2">
+  <div class="card pink"><h3>Not normally</h3><div class="example">an equipment ✗</div><div class="example">equipments ✗</div></div>
+  <div class="card mint"><h3>Use</h3><div class="example">equipment ✓</div><div class="example">a piece of equipment ✓</div></div>
+</div>
+<div class="example">At work: The equipment is in the storage area.</div>
+<div class="bookref"><span class="page">MINING</span><span>Teacher-designed clarification for work vocabulary.</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Demonstratives</small><h2>This or that?</h2></div><div class="circle-no">11</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="This or that?" src="assets/07_demonstratives.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Use <b>this</b> for one object near you and <b>that</b> for one object farther away.</p>
+<div class="grid2">
+  <div class="card sky"><h3>THIS · near</h3><div class="example">This is my helmet.</div><p>The object is close to the speaker.</p></div>
+  <div class="card yellow"><h3>THAT · far</h3><div class="example">That is the radio.</div><p>The object is farther from the speaker.</p></div>
+</div>
+<div class="example">Point to an object near you, then one farther away.</div>
+<div class="bookref"><span class="page">BOOK</span><span>Grammar Bank 3B · p. 96</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Demonstratives</small><h2>These or those?</h2></div><div class="circle-no">12</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="These or those?" src="assets/08_demonstratives_plural.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Use <b>these</b> and <b>those</b> for plural objects.</p>
+<div class="grid2">
+  <div class="card mint"><h3>THESE · near</h3><div class="example">These are my gloves.</div><p>More than one object, close to you.</p></div>
+  <div class="card pink"><h3>THOSE · far</h3><div class="example">Those are my boots.</div><p>More than one object, farther away.</p></div>
+</div>
+<div class="example">Near + plural = these · Far + plural = those</div>
+<div class="bookref"><span class="page">BOOK</span><span>Grammar Bank 3B · p. 96</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Questions</small><h2>Ask about objects</h2></div><div class="circle-no">13</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="Ask about objects" src="assets/07_demonstratives.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Use simple questions to identify an object or a group of objects.</p>
+<table class="table">
+  <tr><th>Question</th><th>Answer</th></tr>
+  <tr><td>What is this?</td><td>It’s a phone.</td></tr>
+  <tr><td>What is that?</td><td>It’s a radio.</td></tr>
+  <tr><td>What are these?</td><td>They’re keys.</td></tr>
+  <tr><td>What are those?</td><td>They’re boots.</td></tr>
+</table>
+<div class="example">Notice: singular → <b>is / it</b> · plural → <b>are / they</b>.</div>
+<div class="bookref"><span class="page">BOOK</span><span>SB 3B · pp. 18–19</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Prepositions</small><h2>Where is it?</h2></div><div class="circle-no">14</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="Where is it?" src="assets/09_prepositions.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Use <b>in, on, under</b> to describe basic location.</p>
+<div class="grid3">
+  <div class="card sky"><h3>IN</h3><div class="example">The gloves are in the locker.</div></div>
+  <div class="card mint"><h3>ON</h3><div class="example">The radio is on the table.</div></div>
+  <div class="card yellow"><h3>UNDER</h3><div class="example">The boots are under the bench.</div></div>
+</div>
+<div class="bookref"><span class="page">EXTRA</span><span>Teacher-designed preposition practice based on Jimmy’s assessment needs.</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Mining + Location</small><h2>Locate equipment at work</h2></div><div class="circle-no">15</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="Locate equipment at work" src="assets/09_prepositions.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Combine object vocabulary and prepositions in a realistic work context.</p>
+<div class="grid2">
+  <div class="card mint"><h3>Ask</h3>
+    <div class="example">Where is the radio?</div>
+    <div class="example">Where are the gloves?</div>
+  </div>
+  <div class="card yellow"><h3>Answer</h3>
+    <div class="example">It’s on the table.</div>
+    <div class="example">They’re in the locker.</div>
+  </div>
+</div>
+<div class="example">Use singular/plural correctly when you answer.</div>
+<div class="bookref"><span class="page">MINING</span><span>PPE + tools + in/on/under</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Pronunciation</small><h2>Plural pronunciation</h2></div><div class="circle-no">16</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="Plural pronunciation" src="assets/05_plural.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Listen for plural endings and keep the final sound clear enough to show “more than one.”</p>
+<div class="grid3">
+  <div class="card"><h3>/s/</h3><p>boots<br/>helmets</p></div>
+  <div class="card sky"><h3>/z/</h3><p>keys<br/>gloves</p></div>
+  <div class="card mint"><h3>/ɪz/</h3><p>watches<br/>boxes</p></div>
+</div>
+<div class="example">The goal is recognition and clear production — not memorizing phonetic symbols.</div>
+<div class="bookref"><span class="page">PRON</span><span>Plural ending awareness</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>PPE & Equipment</small><h2>Mining English</h2></div><div class="circle-no">17</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="Mining English" src="assets/10_mining_english.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Use the language from 3A–3B with PPE and simple workplace equipment.</p>
+<div class="grid2">
+  <div class="card sky"><h3>Identify</h3>
+    <div class="example">This is a helmet.</div>
+    <div class="example">These are gloves.</div>
+  </div>
+  <div class="card mint"><h3>Locate</h3>
+    <div class="example">The radio is on the table.</div>
+    <div class="example">The tools are in the box.</div>
+  </div>
+</div>
+<div class="pills" style="margin-top:10px"><span class="pill">helmet</span><span class="pill">gloves</span><span class="pill">boots</span><span class="pill">vest</span><span class="pill">radio</span><span class="pill">tools</span><span class="pill">equipment</span></div>
+<div class="bookref"><span class="page">MINING</span><span>Personalized extension for Jimmy</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Guided Practice</small><h2>Build the sentence</h2></div><div class="circle-no">18</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="Build the sentence" src="assets/02_goal.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Choose the correct combination before moving to freer speaking.</p>
+<div class="quizrow"><span>1. ___ is a helmet near me.</span><button class="reveal">Show</button><span class="answer">This</span></div>
+<div class="quizrow"><span>2. ___ are my gloves near me.</span><button class="reveal">Show</button><span class="answer">These</span></div>
+<div class="quizrow"><span>3. The radio is ___ the table.</span><button class="reveal">Show</button><span class="answer">on</span></div>
+<div class="quizrow"><span>4. One box → two ___.</span><button class="reveal">Show</button><span class="answer">boxes</span></div>
+<div class="quizrow"><span>5. ___ umbrella.</span><button class="reveal">Show</button><span class="answer">an</span></div>
+<div class="bookref"><span class="page">PRACTICE</span><span>Controlled review before speaking</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Speaking Task</small><h2>Find the equipment</h2></div><div class="circle-no">19</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="Find the equipment" src="assets/11_speaking.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Information-gap task: describe and locate equipment in a workplace scene.</p>
+<div class="grid3">
+  <div class="card"><h3>Round 1</h3><p>Use full prompts. Ask what each object is.</p></div>
+  <div class="card mint"><h3>Round 2</h3><p>Ask where each object is using in / on / under.</p></div>
+  <div class="card yellow"><h3>Round 3</h3><p>Use fewer prompts and answer naturally.</p></div>
+</div>
+<div class="example">Target: Ask and answer about 6–8 objects with singular/plural forms.</div>
+<div class="bookref"><span class="page">SPEAK</span><span>Information gap · teacher-designed extension</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Review</small><h2>Check what you can do</h2></div><div class="circle-no">20</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="Check what you can do" src="assets/11_speaking.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Complete a short check before the end of the session.</p>
+<div class="quizrow"><span>1. Choose: a / an umbrella.</span><button class="reveal">Show</button><span class="answer">an umbrella</span></div>
+<div class="quizrow"><span>2. One watch → two ___.</span><button class="reveal">Show</button><span class="answer">watches</span></div>
+<div class="quizrow"><span>3. One object near you: ___ is my phone.</span><button class="reveal">Show</button><span class="answer">This</span></div>
+<div class="quizrow"><span>4. Plural objects far away: ___ are my boots.</span><button class="reveal">Show</button><span class="answer">Those</span></div>
+<div class="quizrow"><span>5. The gloves are ___ the locker.</span><button class="reveal">Show</button><span class="answer">in</span></div>
+<div class="bookref"><span class="page">REVIEW</span><span>3A–3B + prepositions extension</span></div>
+</div></div></div>
+</div></div></section><section class="slide"><div class="slide-inner"><div class="section-box top-space">
+<div class="section-title"><div><small>Homework</small><h2>Keep practicing</h2></div><div class="circle-no">21</div></div>
+<div class="section-split"><div class="section-image-pane"><img class="section-visual-image" alt="Keep practicing" src="assets/12_homework.jpg"></div>
+<div class="section-content-pane"><div class="section-body">
+<p class="leadline">Describe real objects from home or work and save useful work vocabulary in your Student Hub.</p>
+<div class="grid2">
+  <div class="card mint"><h3>Homework</h3><ul>
+    <li>Choose <b>8 objects</b> from home or work.</li>
+    <li>Write singular/plural forms where possible.</li>
+    <li>Use this/that/these/those in 4 sentences.</li>
+    <li>Use in/on/under in 3 location sentences.</li>
+  </ul></div>
+  <div class="card yellow"><h3>Mining English Bank</h3><p>Add these useful words:</p>
+    <div class="pills"><span class="pill">helmet</span><span class="pill">gloves</span><span class="pill">boots</span><span class="pill">vest</span><span class="pill">radio</span><span class="pill">tools</span></div>
+  </div>
+</div>
+<div class="example">Next session: Family & belongings · possessives · who things belong to.</div>
+<div class="bookref"><span class="page">HOMEWORK</span><span>Session 3 follow-up</span></div>
+</div></div></div>
+</div></div></section></div></main>
+</div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const items=[...document.querySelectorAll('.side-item')];
+const counter=document.getElementById('counter');let current=0;
+function go(i){current=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,n)=>s.classList.toggle('active',n===current));items.forEach((b,n)=>b.classList.toggle('active',n===current));counter.textContent=`${current+1} / ${slides.length}`;items[current]?.scrollIntoView({block:'nearest'});slides[current].scrollTop=0;}
+items.forEach((b,i)=>b.addEventListener('click',()=>go(i)));
+document.getElementById('prevBtn').addEventListener('click',()=>go(current-1));
+document.getElementById('nextBtn').addEventListener('click',()=>go(current+1));
+document.getElementById('fullBtn').addEventListener('click',()=>{if(!document.fullscreenElement){document.documentElement.requestFullscreen?.()}else{document.exitFullscreen?.()}});
+document.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName))return;if(e.key==='ArrowRight'||e.key==='PageDown')go(current+1);if(e.key==='ArrowLeft'||e.key==='PageUp')go(current-1);});
+document.querySelectorAll('.reveal').forEach(btn=>btn.addEventListener('click',()=>{const a=btn.parentElement.querySelector('.answer');a.classList.toggle('show');btn.textContent=a.classList.contains('show')?'Hide':'Show';}));
+</script></body></html>
